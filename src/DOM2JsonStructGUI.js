@@ -2033,232 +2033,68 @@ DOM2JsonStructGUI.init = function() {
 
         dom2structGUI
                 .populateTreeFromTemplate({
-                    __dom2jsonstruct : {
-                        useWizard : true,
-                        triggerCollectingWizardText : "Here you have to define a javascript expression that will determine if collecting and sendin data for an order should be started.",
-                        saveSelfURL : "http://localhost:8080/semRecSys-rest/JsonStructService/OrderTracking"
-                    },
-                    "@id" : {
-                        __dom2jsonstruct : {
-                            hideInTree : true,
-                            calculateValue : function(alreadyCollected) {
-                                // generate a rfc4122 compatible uuid
-                                // http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
-                                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
-                                        .replace(
-                                                /[xy]/g,
-                                                function(c) {
-                                                    var r = Math.random() * 16 | 0, v = c == 'x' ? r
-                                                            : (r & 0x3 | 0x8);
-                                                    return v.toString(16);
-                                                });
-                            }
-                        }
-                    },
-                    "creationDate" : {
-                        __dom2jsonstruct : {
-                            hideInTree : true,
-                            calculateValue : function(alreadyCollected) {
-                                // see Date.prototype.toISOString in
-                                // DOM2JsonStruct
-                                // or ECMAScript 5
-                                return new Date().toISOString();
-                            }
-                        }
-                    },
-                    "ids" : {
-                        "entry" : {
-                            "@thing" : {
-                                __dom2jsonstruct : {
-                                    hideInTree : true,
-                                    calculateValue : function(alreadyCollected) {
-                                        return alreadyCollected["@id"];
-                                    }
-                                }
-                            },
-                            "pk" : {
-                                "id" : {
-                                    __dom2jsonstruct : {
-                                        wizardText : "Please select the cookie that contains "
-                                                + "the session id for the current session.",
-                                        valueType : "fromCookie"
-                                    }
-                                },
-                                "type" : {
-                                    __dom2jsonstruct : {
-                                        hideInTree : true,
-                                        valueType : "constant",
-                                        constantValue : "Session"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "label" : {
-                        __dom2jsonstruct : {
-                            hideInTree : true,
-                            valueType : "constant",
-                            constantValue : "New Order"
-                        }
-                    },
-                    "currency" : {
-                        __dom2jsonstruct : {
-                            wizardText : "Please select a number that contains the currency"
-                                    + " for the current order. Afterwards clicking you can define a mapping.",
-                            valueType : "mapping"
-                        }
-                    },
-                    "deliveryMethod" : {
-                        "@id" : {
-                            __dom2jsonstruct : {
-                                hideInTree : true,
-                                calculateValue : function(alreadyCollected) {
-                                    // generate a rfc4122 compatible uuid
-                                    // http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
-                                    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
-                                            .replace(
-                                                    /[xy]/g,
-                                                    function(c) {
-                                                        var r = Math.random() * 16 | 0, v = c == 'x' ? r
-                                                                : (r & 0x3 | 0x8);
-                                                        return v.toString(16);
-                                                    });
-                                }
-                            }
-                        },
-                        "ids" : {
-                            "entry" : {
-                                "@thing" : {
-                                    __dom2jsonstruct : {
-                                        hideInTree : true,
-                                        calculateValue : function(
-                                                alreadyCollected) {
-                                            return alreadyCollected.deliveryMethod["@id"];
-                                        }
-                                    }
-                                },
-                                "pk" : {
-                                    "id" : {
-                                        __dom2jsonstruct : {
-                                            wizardText : "Please select the name of the delivery method."
-                                        }
-                                    },
-                                    "type" : {
-                                        __dom2jsonstruct : {
-                                            hideInTree : true,
-                                            valueType : "constant",
-                                            constantValue : "Name"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "lineItems" : {
-                        "entry" : [ {
-                            "amount" : {
-                                __dom2jsonstruct : {
-                                    wizardText : "Please select the quantity for the line items."
-                                }
-                            },
-                            "currency" : {
-                                __dom2jsonstruct : {
-                                    wizardText : "Please select the currency for the line items."
-                                }
-                            },
-                            "price" : {
-                                __dom2jsonstruct : {
-                                    wizardText : "Please select the price for the line items.",
-                                    valueType : "regexFloat"
-                                }
-                            },
-                            "productNo" : {
-                                __dom2jsonstruct : {
-                                    wizardText : "Please select the product numbers for the line items.",
-                                    valueType : "singleString"
-                                }
-                            },
-                            "tax" : {
-                                __dom2jsonstruct : {
-                                    wizardText : "Please select the tax for the line items.",
-                                    valueType : "regexFloat"
-                                }
-                            },
-                            "unit" : {
-                                __dom2jsonstruct : {
-                                    wizardText : "Please select the <a href=\"http://www.unece.org/fileadmin/DAM/cefact/recommendations/rec20/rec20_Rev8e_2012.xls\" target=\"blank\">quantity unit according to UNECE/CEFACT Trade Facilitation Recommendation No.20</a> for the line items or enter a constant e.g. C62 for pieces.",
-                                    valueType : "regexFloat"
-                                }
-                            },
-                            "@order" : {
-                                __dom2jsonstruct : {
-                                    hideInTree : true,
-                                    calculateValue : function(alreadyCollected) {
-                                        return alreadyCollected["@id"];
-                                    }
-                                }
-                            }
-                        } ]
-                    },
-                    "paymentMethod" : {
-                        "@id" : {
-                            __dom2jsonstruct : {
-                                hideInTree : true,
-                                calculateValue : function(alreadyCollected) {
-                                    // generate a rfc4122 compatible uuid
-                                    // http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
-                                    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
-                                            .replace(
-                                                    /[xy]/g,
-                                                    function(c) {
-                                                        var r = Math.random() * 16 | 0, v = c == 'x' ? r
-                                                                : (r & 0x3 | 0x8);
-                                                        return v.toString(16);
-                                                    });
-                                }
-                            }
-                        },
-                        "ids" : {
-                            "entry" : {
-                                "@thing" : {
-                                    __dom2jsonstruct : {
-                                        hideInTree : true,
-                                        calculateValue : function(
-                                                alreadyCollected) {
-                                            return alreadyCollected.paymentMethod["@id"];
-                                        }
-                                    }
-                                },
-                                "pk" : {
-                                    "id" : {
-                                        __dom2jsonstruct : {
-                                            wizardText : "Please select the name of the payment method."
-                                        }
-                                    },
-                                    "type" : {
-                                        __dom2jsonstruct : {
-                                            hideInTree : true,
-                                            valueType : "constant",
-                                            constantValue : "Name"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "tax" : {
-                        __dom2jsonstruct : {
-                            wizardText : "Please select the name of the delivery method.",
-                            valueType : "regexFloat"
-                        }
-                    },
-                    "total" : {
-                        __dom2jsonstruct : {
-                            wizardText : "Please select the total for this order.",
-                            valueType : "regexFloat"
-                        }
-                    }
-                });
+		"__dom2jsonstruct" : {
+			"useWizard" : true,
+			"triggerCollectingWizardText" : "Here you have to define a javascript expression that will determine if collecting and sendin data for an order should be started.",
+			"saveSelfURL" : "http://localhost:8080/semRecSys-rest/JsonStructService/jobOffer"
+		},
+		"id" : {
+			"__dom2jsonstruct" : {
+				"hideInTree" : true,
+				"calculateValue" : function(alreadyCollected) {
+					// generate a rfc4122 compatible uuid
+					// http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
+					return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+					.replace(
+						/[xy]/g,
+						function(c) {
+							var r = Math.random() * 16 | 0, v = c == 'x' ? r
+							: (r & 0x3 | 0x8);
+							return v.toString(16);
+						});
+				}
+			}
+		},
+		"creationDate" : {
+			"__dom2jsonstruct" : {
+				"hideInTree" : true,
+				"calculateValue" : function(alreadyCollected) {
+					// see Date.prototype.toISOString in
+					// DOM2JsonStruct
+					// or ECMAScript 5
+					return new Date().toISOString();
+				}
+			}
+		},
+		"url" : {
+			"__dom2jsonstruct" : {
+				"hideInTree" : true,
+				"calculateValue" : function(alreadyCollected) {
+					return window.location.href;
+				}
+			}
+		},
+		"title" : {
+			"__dom2jsonstruct" : {
+				"wizardText" : "Please select the title of the job offer"
+			}
+		},
+		"body" : {
+			"__dom2jsonstruct" : {
+				"wizardText" : "Please select the main text of the job offer"
+			}
+		},
+		"publisher" : {
+			"__dom2jsonstruct" : {
+				"wizardText" : "Please select the publisher of the job offer"
+			}
+		},
+		"location" : {
+			"__dom2jsonstruct" : {
+				"wizardText" : "Please select the location of this job offer."
+			}
+		}
+	});
         dom2structGUI.enableOtherTemplate();
     } else if (typeof window.__incentergyInitGUI == "function"
             && !document.getElementById("dom2jsonstructgui-tree-view")) {
