@@ -1122,3 +1122,5 @@ if (typeof JSON !== 'object') {
         };
     }
 }());
+
+export DOM2JsonStruct;
