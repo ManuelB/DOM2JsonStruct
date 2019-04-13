@@ -1,0 +1,35 @@
+DOM2JsonStruct GUI
+
+ This is the GUI component for the DOM2JsonStruct class. It can load a template which can be enriched by some values especially suited for customizing the GUI. This document describses mainly 
+
+[images/Dom2JsonStructGUI.png]
+
+[images/Dom2JsonStructGUIDemo.png]
+
+Example template for the given html structure:
+
+%{include|source=example_template_gui.js}
+
+ Here is a list of current supported valueTypes:
+
+ * constant - set a constant value for the property
+
+ * mapping - maps different values to other values e.g. currency symbols to currency abbreviations (€ => EUR)
+
+ * singleString - will show a wizard to extract a single string from text
+
+ * regexFloat - will show a wizard to specify a regular expression to extract a float e.g. currency
+
+ * fromCookie - gives a select box to select a cookie
+
+ * image - extracts the src attribute from an image node
+
+ The following types might be supported in future.
+
+ * regexDate
+
+ * regexDatetime
+
+ * customJavaScript
+
+ The supported value types will be used from the GUI to generate correct working preSetProcessing and calculateValue functions.

@@ -1,0 +1,33 @@
+DOM2JsonStruct - Extract structured data
+
+ An approach for extracting structured data from HTML pages using JavaScript objects as templates and CSS {{CSS3}} {{SIZZLE}} for binding {{BINDING}} certain properties on certain parts of the website. In the end the system gets an html DOM tree as the input and will create a javascript object. This object can be exported using JSON {{JSJSON}} library from Crockford to generate JSON {{JSON}} and then be send with an image url send to another server as a get parameter. The JSON has to be encoded with encodeURIComponent.
+
+[images/Dom2JsonStruct.png]
+
+Input:
+
+%{include|source=example_cart.html}
+
+Output:
+
+%{include|source=example_cart.js}
+
+
+ The "template" is a javascript object itself. It has the same structure as the outcoming object including some additional hidden/private properties with two leading underscores {{PRIVATE}} which will tell the processor how to make the binding. This idea is borrowed from systems that support annotations {{ANNOTATION}}.
+
+Example template for the given html structure:
+
+%{include|source=example_template.js}
+
+
+ For using DOM2JsonStruct you have to intatiate the DOM2JsonStruct class. When intatiating it you have to supply a DOM which will be used. If no DOM is given the current DOM of the current browser window will be taken. Afterwards you can used the following functions. There is a function called collectDataForTemplate(template) which requires a template as input. This template is used to generate the output based on the current DOM of the page. There is DOM2JsonStruct.validationErrors(outputObject) this function can be invoked after calling collectDataForTemplate and it will return the errors collected for this particular object.
+
+ {BINDING} {{http://en.wikipedia.org/wiki/Data_binding}} \
+ {JSON} {{http://www.json.org}} \
+ {JSJSON} {{https://github.com/douglascrockford/JSON-js/blob/master/json2.js}} \
+ {PRIVATE} {{http://docs.python.org/2/tutorial/classes.html#private-variables-and-class-local-references}} \
+ {DOM} {{http://www.w3.org/TR/DOM-Level-2-HTML/}} \
+ {CSS3} {{http://www.w3.org/TR/css-2010/}} \
+ {SIZZLE} {{http://sizzlejs.com/}} \
+ {ANNOTATION} {{http://jcp.org/en/jsr/detail?id=175}}
+
