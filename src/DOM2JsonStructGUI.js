@@ -243,7 +243,7 @@ DOM2JsonStructGUI.prototype.initSelectorDisplay = function() {
     var body = this.body;
     this.selectorTextDiv = document.createElement("div");
     this.selectorTextDiv.id = "dom2jsonstructgui-selector-div";
-    this.selectorTextDiv.style.zIndex = 20;
+    this.selectorTextDiv.style.zIndex = 10020;
     this.selectorTextDiv.style.fontFamily = "sans-serif";
     if ("boxShadow" in this.selectorTextDiv.style) {
         this.selectorTextDiv.style.boxShadow = "0 0 10px #9999FF";
@@ -383,7 +383,7 @@ DOM2JsonStructGUI.prototype.showTextInPreview = function(textToShow, beautify) {
 
     this.previewTextArea = document.createElement("textarea");
     this.previewTextArea.id = "dom2jsonstructgui-preview-textarea";
-    this.previewTextArea.style.zIndex = 21;
+    this.previewTextArea.style.zIndex = 10021;
     this.previewTextArea.style.width = "500px";
     this.previewTextArea.style.height = "400px";
 
@@ -412,7 +412,7 @@ DOM2JsonStructGUI.prototype.generateAndCleanPreviewDiv = function() {
         this.previewDiv.id = "dom2jsonstructgui-preview-div";
         this.previewDiv.style.width = "500px";
         this.previewDiv.style.height = "400px";
-        this.previewDiv.style.zIndex = 10;
+        this.previewDiv.style.zIndex = 10010;
 
         var $previewDiv = jQuery(this.previewDiv);
         $previewDiv.css("position", "absolute");
@@ -1106,7 +1106,7 @@ DOM2JsonStructGUI.prototype.populateTreeFromTemplate = function(template) {
         treeView.style.fontFamily = "sans-serif";
         treeView.style.maxHeight = "600px";
         treeView.style.overflow = "auto";
-        treeView.style.zIndex = 20;
+        treeView.style.zIndex = 10020;
         if ("boxShadow" in treeView.style) {
             treeView.style.boxShadow = "0 0 10px #9999FF";
         }
@@ -1323,7 +1323,7 @@ DOM2JsonStructGUI.prototype.initWizard = function() {
     wizardBox.style.fontFamily = "sans-serif";
     wizardBox.style.height = "300px";
     wizardBox.style.overflow = "auto";
-    wizardBox.style.zIndex = 20;
+    wizardBox.style.zIndex = 10020;
     if ("boxShadow" in wizardBox.style) {
         wizardBox.style.boxShadow = "0 0 10px #9999FF";
     }
@@ -2081,7 +2081,10 @@ DOM2JsonStructGUI.init = function() {
 		},
 		"body" : {
 			"__dom2jsonstruct" : {
-				"wizardText" : "Please select the main text of the job offer"
+				"wizardText" : "Please select the main text of the job offer",
+				"preSetProcessing" : function (node) {
+				    return node.innerHTML.replace(/(<([^>]+)>)/ig, "");
+				}
 			}
 		},
 		"publisher" : {
